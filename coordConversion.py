@@ -6,8 +6,18 @@ def coordConversion(pxX, pxY, n):
     #"G0 X(A) Y(B) Z(C)" - Tells the acutator to move in to the destination (A,B,C). It will not always be a straight line.
     #"G1 X(A) Y(B) Z(C)" - Tells the actuator to move in a straight line to the destination (A,B,C), where A,B,C are absolute doubles.
     #"G2 X(A) Y(B) I(C) J(D)" - Tells the acutator to move clockwise from a center point to the end point (A,B), where A,B are absolute doubles and C,D are offsets of X and Y respectively of the center point.
-    #"G3 X(A) Y(B) I(C) J(D)" - Tells the acutator to move counter-clockwise from a center point to the end point (A,B), where A,B are absolute doubles and C,D are offsets of X and Y respectively of the center point. 
-    
+    #"G3 X(A) Y(B) I(C) J(D)" - Tells the acutator to move counter-clockwise from a center point to the end point (A,B), where A,B are absolute doubles and C,D are offsets of X and Y respectively of the center point.
+    #Initial Varaiables:
+    cameraResolutionX =  1296 #Maximum X resolution of the Pixy2 Camera. Change this to desire resolution when chosen.
+    cameraResolutionY = 976 #Maximum Y resolution of the Pixy2 Camera. Change this to desire resolution when chosen.
+    maximumBedLen = 219.9 #Maximum Length (X and Y) of Printer Bed. Do not change.
+    maximumBedHei = 199.9 #Maximum Height (Z) of Printer. Do not change.
+    pixtoGX = maximumBedLen/cameraResolutionX 
+    pixtoGY = maximumBedLen/cameraResolutionY
+    if (pxX > cameraResolutionX):
+        pxX = cameraResolutionX
+    if (pxY > cameraResolutionY):
+        pxY = cameraResolutionY
     #Metadata:
     codeStream = ""
     codeStream += ";TARGET_ID: " + str(n) + "\n"
@@ -18,12 +28,9 @@ def coordConversion(pxX, pxY, n):
     codeStream += "G90 ;Sets Coordinates to absolute positioning.\n"
     codeStream += "M140 S0 ;Ensures that the bed does not heat up or turn on.\n"
     codeStream += "M104 S0 ;Ensures that the actuator does not heat up.\n"
-    codeStream += "G0 X" + str(92.1) +" Y" + str(93.1) +"\n"
-    codeStream += "G0 Z" + str(0.5) + "\n"
-    codeStream += "G0 X" + str(100.1) +" Y" + str(100.1) +"\n"
-    codeStream += "G0 Z" + str(30.5) + "\n"
-    codeStream += "G0 X" + str(92.1) + "\n"
-    codeStream += "G28 ;Returns actuator to home location\n"
+    codeStream += "G0 Z" + str(maximumBedHei) +"\n"
+    codeStream += "G0 X" + str(pxX*pixtoGX) +" Y" + str(pxY*pixtoGY) +"\n"
+    codeStream += "G0 Z" + str(99.9) +"\n"
     return codeStream #gcode strings
 
 
