@@ -66,3 +66,11 @@ def roundRobinSch():
         ##Clean up routine when microcontroller s waiting for a response or data.
         
     return
+
+def main():
+    x = int(input("Enter the x-coordinate:"))
+    y = int(input("Enter the y-coordinate:"))
+    createFile(x,y)
+    return
+
+main()
