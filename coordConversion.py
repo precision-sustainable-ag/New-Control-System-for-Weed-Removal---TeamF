@@ -1,4 +1,5 @@
 import os
+import time
 
 def coordConversion(pxX, pxY, n):
     #Input: A set of pixel locations of the targeted object.
@@ -36,35 +37,13 @@ def coordConversion(pxX, pxY, n):
 
 def createFile(pxL, pxW):
     #Creates the file that will hold the gcode strings.
-    n = 0
-    while (os.path.exists("TargetLoc"+str(n)+".gcode")):
+    n = 1
+    while (os.path.exists("./targets/TargetLoc"+str(n)+".gcode")):
            n += 1
     else:
-        f = open("TargetLoc"+str(n)+".gcode","w")
+        f = open("./targets/TargetLoc"+str(n)+".gcode","w")
         f.write(coordConversion(pxL,pxW, n))
         f.close()
-    return
-
-def roundRobinSch():
-    #Premliminary variables and function go here.
-    mode = 0
-    #Mode 0: Camera Mode - Communicates with Camera to establish connection and waits for data to be sent.
-    #Mode 1: Conversion Mode - Converts and Builds Gcode file to be sent to printer movement.
-    #Mode 2: Movement Mode - Establish connection with printer and moves the actuator to the target location based on gcode file.
-    #Mode 3: Pump Mode - Establish connection with pump system and sends a pulse to the actuator to eject suficient amount of solution.
-    while (true):
-        if (mode == 0):
-            mode +=1
-        elif (mode ==1):
-            mode +=1
-        elif (mode ==2):
-            mode +=1
-        elif (mode ==3):
-            mode +=1
-        else: ##Default Path.
-            createFile(0,0)    
-        ##Clean up routine when microcontroller s waiting for a response or data.
-        
     return
 
 def main():
