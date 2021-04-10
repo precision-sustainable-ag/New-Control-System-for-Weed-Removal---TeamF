@@ -3,15 +3,15 @@ from time import sleep                  #load time controls in the form of sleep
 
 inl - 23
 in2 - 24                                #enable 3 input pins necessary for L298N operation. in1 and in2 determine polarity of motor. en determines power delivered
-en - 25
+ena - 25
 
 GPIO.setmode (GPIO.BCM)
 GPIO.setup (in1, GPIO.OUT)
 GPIO.setup (in2, GPIO.OUT)              #setup L298N pins corresponding to necessary Raspberri Pi pins
-GPIO.setup (en, GPIO.OUT)
+GPIO.setup (ena, GPIO.OUT)
 GPIO.output (in1, GPIO.LOW)             #set first input to low side
 GPIO.output (in2, GPIO.HIGH)            #set second input to high side
-laser = GPIO.PWM(en, 100)               #setup up pulse width modulation control for laser out of 100
+laser = GPIO.PWM(ena, 100)              #setup up pulse width modulation control for laser out of 100
 
 laser.start(0)                          #start duty cycle at 0 to ensure that laser begins off
 
