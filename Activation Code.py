@@ -1,9 +1,9 @@
 import RPi.GPIO as GPIO
 from time import sleep                  #load time controls in the form of sleep command
 
-inl - 23
-in2 - 24                                #enable 3 input pins necessary for L298N operation. in1 and in2 determine polarity of motor. en determines power delivered
-ena - 25
+inl = 23
+in2 = 24                                #enable 3 input pins necessary for L298N operation. in1 and in2 determine polarity of motor. en determines power delivered
+ena = 25
 
 GPIO.setmode (GPIO.BCM)
 GPIO.setup (in1, GPIO.OUT)
