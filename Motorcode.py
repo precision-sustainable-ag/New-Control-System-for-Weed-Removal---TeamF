@@ -11,7 +11,7 @@ GPIO.setup (in2, GPIO.OUT)              #setup L298N pins corresponding to neces
 GPIO.setup (en, GPIO.OUT)
 GPIO.output (in1, GPIO.LOW)             #set first input to low side
 GPIO.output (in2, GPIO.LOW)             #set second input to low side
-motor = GPIO.PWM(en, 100)               #setup up pulse width modulation control for 100 Hz on the enable port
+motor = GPIO.PWM(en, 1000)              #setup up pulse width modulation control for 1000 Hz on the enable port
 
 motor.start(75.7576)                    #start duty cycle at 75.76%  to match optimized bead settings
 x = 1
