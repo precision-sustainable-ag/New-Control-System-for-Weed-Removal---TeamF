@@ -11,9 +11,9 @@ GPIO.setup (in2, GPIO.OUT)              #setup L298N pins corresponding to neces
 GPIO.setup (en, GPIO.OUT)
 GPIO.output (in1, GPIO.LOW)             #set first input to low side
 GPIO.output (in2, GPIO.LOW)             #set second input to high side
-laser = GPIO.PWM(en, 100)               #setup up pulse width modulation control for laser at 100 Hz
+laser = GPIO.PWM(en, 1000)               #setup up pulse width modulation control for laser at 1000 Hz
 
-laser.start(0)                          #start duty cycle at 0 to ensure that laser begins off
+laser.start(75.76)                      
 x = 1
 while x == 1:                           #begin on/off cycle loop
     GPIO.output(in1,GPIO.HIGH)          #laser turnes on
